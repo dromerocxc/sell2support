@@ -1,0 +1,219 @@
+/*var settings = 
+    {  url: 'https://slscxc1568216011.zendesk.com/api/v2/tickets.json',  
+       headers: {"Authorization": "Bearer 9DtC6i8ER1YkDHctHBFPxS4GHEkXvy6o4mVRSuHW"},  
+       secure: true,  
+       type: 'POST',  
+       contentType: 'application/json',  
+       data: JSON.stringify({"ticket": {"subject": "subject s2s" , "status": "open", "comment": { "body": "body" }}})
+    };
+
+    var client = ZAFClient.init();
+    client.request(settings).then(function(data){
+        console.log(data);
+        }
+    );*/
+
+
+/* $.ajax
+    ({
+      type: "POST",
+      url: "https://slscxc1568216011.zendesk.com/api/v2/tickets.json",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Basic dromero@cxc.mx/9DtC6i8ER1YkDHctHBFPxS4GHEkXvy6o4mVRSuHW"
+      },
+    data: JSON.stringify({"ticket": 
+          {"subject": 'Esta es una solicitud desde Sell hecha por S2S"', 
+           "comment": { "body": 'for s2s work + deal_name' }
+        }
+    }),
+      success: function (){
+
+        console.log('Thanks for your comment!'); 
+      }
+    });*/
+
+var data = "";
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://slscxc1568216011.zendesk.com/api/v2/tickets.json");
+xhr.setRequestHeader("Authorization", "Basic ZHJvbWVyb0BjeGMubXg6MjFDbGF1ZGlhMjEhKg==");
+xhr.setRequestHeader("Cookie", "__cfruid=4c8efc58d5d9456e1177475ff153f1771c6b158a-1644278114; _zendesk_cookie=BAhJIhl7ImRldmljZV90b2tlbnMiOnt9fQY6BkVU--459ed01949a36415c1716b5711271c3d08918307; _zendesk_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTRiOThkNzdjZmRlYjYxNzAwOWRjZWI2NTYxYTMzMTNiBjsAVEkiDGFjY291bnQGOwBGaQMwZpBJIgpyb3V0ZQY7AEZpA4qMLQ%3D%3D--cc4a6349875b3d50ba57aa366dd0e5dc87e47cad");
+
+xhr.send(data);
+
+
+
+function actionbtn(client){
+  /*var otherClient = client.instance('87847213-bce2-452b-be8d-1cdd3891fb4b');
+  console.log('pa dentro');
+  console.log(otherClient);*/
+
+console.log(client);
+
+  var deal_name;      
+  var datos = $("#form_propuestas").serialize() 
+  $("#form_propuestas").find(':input').each(function() {
+     var elemento= this;
+     if(elemento.id == 'deal'){
+        deal_name = elemento.value;
+     }
+     /*console.log("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value); */
+  });
+
+    requestSetting = {
+      url: "https://slscxc1568216011.zendesk.com/api/v2/search.json?query=44562",
+      contentType: "application/json",
+      headers: {"Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')},
+      secure: true,
+      cors: true,
+      type: "GET",
+      dataType: 'json'
+    };
+
+    client.request(requestSetting).then((data) => {
+      console.log("POST data:"+ data);
+    });
+}
+
+
+
+/**** PROPUESTAS */
+function propuesta(deal, client){
+     var html = '';
+     html += "<form name='form_propuestas' id='form_propuestas'>";
+     html += "<label><b>*Detalle Propuesta</b></label><select name='1500015626001' id='1500015626001' class='form-control'>";
+     html += "<option value = '0'>Seleccione una opción</option><option value = 'propuesta_implementación'>Propuesta Implementación</option>";
+     html += "<option value = 'propuesta_optimizacion'>Propuesta Optimización</option><option value = 'arquitectura'>Arquitectura</option>";
+     html += "<option value = 'ajustes_de_propuesta'>Ajuste propuesta (Cambio de alcance)</option><option value = 'ajuste_horas'>Ajuste de Horas</option>";
+     html += "</select><label><b>*Estado de la Propuesta</b></label><select name='1900007276365' id='1900007276365' class='form-control'>";
+     html += "<option value = '0'>Seleccione una opción</option><option value = 'revisando_el_levantamiento'>Revisando el levantamiento</option>";
+     html += "<option value = 'en_elaboracion'>En Elaboración</option><option value = 'en_ajustes'>En Ajustes</option>";
+     html += "<option value = 'esperando_por_comercial'>Esperando por Comercial</option><option value = 'entregada'>Entregada</option><option value = '6'>No Avanzó</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015680862' id='1500015680862' class='form-control'><label><b>*URL de Entrega</b></label><input type='text' name='1900007274885' id='1900007274885' class='form-control'>";
+     html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+     html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+     html += "<div align='right'><br><button class='btn btn-xs btn-success' name='actionbtna' id='actionbtna'>Enviar</button></div>";
+     html += "</form>";
+     $("#btnblk").empty();
+     $("#trigger3Div").empty();
+     $("#trigger3Div").append(html);
+ }
+function demo(deal, client){
+    var html = '';
+    html += "<form name='form_propuestas' id='form_propuestas'>";
+    html += "<label><b>*Estatus del Demo</b></label><select name='1500015626221' id='1500015626221' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'en_revision'>En Revisión</option><option value = 'en_configuracion'>En Configuración</option><option value = 'esperando_a_comercial'>Esperando por comercial</option><option value = 'revisado'>Revisado</option><option value = 'no_avanzo'>No Avanzó</option></select><label><b>*Tipo de Cuenta (Demo)</b></label><select name='1500015682942' id='1500015682942' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'estrategica'>Estrátegica</option><option value = 'normal'>Normal</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015626801' id='1500015626801' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' name='actionbtna' id='actionbtna'>Enviar</button></div>";
+    html += "</form>";
+     $("#btnblk").empty();
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+
+}
+
+function diagnostico(deal, client){
+    var html = '';
+    html += "<form name='form_diagnostico' id='form_propuestas'>";
+    html += "<label><b>*URL Instancia cliente</b></label><input type'text' name='url-cliente' id='1500015683082' class='form-control'><label><b>*Usuario</b></label><input type'text' name='1900007277085' id='1900007277085' class='form-control'><label><b>*Contraseña</b></label><input type'text' name='1500015626281' id='1500015626281' class='form-control'><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015626301' id='1500015626301' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' name='actionbtna' id='actionbtna'>Enviar</button></div>";
+    html += "</form>";
+    $("#btnblk").empty();
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+
+}
+
+function apoyo_para_levantamiento(deal, client){
+    var html = '';
+    html += "<form name='form_apoyo' id='form_propuestas'>";
+    html += "<label><b>*Tipo levantamiento</b></label><select name='1500015626841' id='1500015626841' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'implementacion_proceso_de_atencion'>Implementación (proceso de atención)</option><option value = 'tecnico_im'>Técnico</option><option value = 'dual'>Dual</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='2223232' value='' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' placeholder='Comentarios' name='obser' id='obser'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' name='actionbtna' id='actionbtna'>Enviar</button></div>";
+    html += "</form>";
+    $("#btnblk").empty();
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+}
+
+function compatibilidad(deal, client){
+    var html = '';
+    html += "<form name='form_apoyo' id='form_propuestas'>";
+    html += "<label><b>*Nombre APP</b></label><input type='text' name='2223232' id='2223232'  class='form-control' placeholder='App's>";
+    html += "<label>Comentarios.:</label><textarea name='obser' id='obser' class='form-control' placeholder='Comentarios'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' name='actionbtna' id='actionbtna' onclick='actionbtn("+client+")'>Enviar</button></div>";
+    html += "</form>";
+    $("#btnblk").empty();
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+}
+
+/**** FIN PROPUESTAS */
+
+ESCRIBIR TODOS LOS FORMULARIOS EN HTML
+          $('#actionbtna').on('click',function(){
+                requestSetting = {
+                url: "https://slscxc1568216011.zendesk.com/api/v2/search.json?query=44562",
+                contentType: "application/json",
+                headers: {"Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')},
+                secure: true,
+                cors: true,
+                type: "GET",
+                dataType: 'json'
+                };
+                client.request(requestSetting).then((data) => {
+                    console.log(data.results);
+                });
+            });   
+
+          $("#form_propuestas").find(':input').each(function() {
+             var elemento= this;
+             if(elemento.id == 'deal'){
+                deal_name = elemento.value;
+             }
+             /*console.log("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value); */
+          });
+
+                          {"ticket": 
+                    {
+                        "subject":   "Propuesta s2s",    
+                        "comment":   
+                                { "body": obser },    
+                        "requester": 
+                                { 
+                                    "email": "pablito@example.org" 
+                                },
+                        "custom_fields": 
+                                [{
+                                    "id": 1500015626001, "value": $('#1500015626001').val(), 
+                                    "id": 1900007276365, "value": $('#1900007276365').val(),
+                                    "id": 1500015680862, "value": $('#1500015680862').val(),
+                                    "id": 1900007274885, "value": $('#1900007274885').val(),
+                                }]
+                    }
+                }
+
+
+
+
+    /*requestSetting = {
+      url: "https://slscxc1568216011.zendesk.com/api/v2/search.json?query=44562",
+      contentType: "application/json",
+      headers: {"Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')},
+      secure: true,
+      cors: true,
+      type: "GET",
+      dataType: 'json'
+    };*/

@@ -1,0 +1,186 @@
+
+<label>Detalle Propuesta</label>
+<select name='form3PSyCOm' class='form-control' onchange='getValue(this.value)'>
+	<option value = '0'>Seleccione una opción</option>
+	<option value = '1'>Propuesta</option>
+	<option value = '2'>Demo</option>
+	<option value = '3'>Diagnóstico</option>
+	<option value = '4'>Apoyo para levantamiento</option>
+	<option value = '5'>Apoyo para levantamiento</option>
+	<option value = '6'>Compatibilidad APP - Int Zendesk</option>
+</select>
+
+token
+kZOEHbxJP7p6DwnrcUXdZysey8oE0BztwhZMIgct
+
+
+
+
+<label>Detalle Propuesta</label><select name='form3PSyCOm' class='form-control' onchange='getValue(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Propuesta Implementación</option><option value = '2'>Propuesta Optimización</option><option value = '3'>Arquitectura</option><option value = '4'>Ajuste propuesta (Cambio de alcance)</option><option value = '5'>Ajuste de Horas</option></select>
+<label>Estado de la Propuesta</label><select name='form3PSyCOm' class='form-control' onchange='getValue(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Revisando el levantamiento</option><option value = '2'>En Elaboración</option><option value = '3'>En Ajustes</option><option value = '4'>Esperando por Comercial</option><option value = '5'>Entregada</option><option value = '6'>No Avanzó</option></select>
+
+
+<label><b>*URL Instancia del Cliente</b></label><input type='text' name='1919119919119' class='form-control'><label><b>*Usuario</b></label><input type='text' name='1919119919' class='form-control'><label><b>*Contraseña</b></label><input type='text' name='119919' class='form-control'><label><b>*Fecha de Entrega</b></label><input type='date' name='29292929' class='form-control' placeholder='P.Ej 20 de Octubre 2022'>
+
+
+<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select><label><b>*Fecha estimada</b></label><input type='date' name='fecest' class='form-control'><label><b>*Hora Sesión</b></label><select name='horases' class='form-control'><option value='0'>-</option><option value='00:09'>00:09</option><option value='00:10'>00:10</option><option value='00:11'>00:11</option><option value='00:12'>00:12</option><option value='00:01'>00:01</option><option value='00:02'>00:02</option><option value='00:03'>00:03</option><option value='00:04'>00:04</option><option value='00:05'>00:05</option><option value='00:06'>00:06</option></select>
+
+
+
+function lsSCsdClientes(){
+    var opt = "<option value = 0 >Seleccione una opción</option><option value = 1>Proyecto Inciado</option><option value = 2>Proyecto en Standby</option><option value = 3>Proyecto culminado</option>";
+    return opt;
+}
+function PDpsySDIntegration(){
+    var opt = "<option value = 0 >Seleccione una opción</option><option value = 1>Apoyo propuesta</option><option value = 2>Implementación (Proyecto)</option><option value = 3>Apoyo en sesión de levantamiento técnico</option>";
+    return opt;
+}
+
+
+/******** 3 PCpsySDComercial */
+PDpsySDIntegration(){ 
+  var select = "<select name='formtion' class='form-control' onchange='TrIntg(this.value)'>";
+  var opt = "<option value = 0 >Seleccione una opción</option><option value = 1>Apoyo propuesta</option><option value = 2>Implementación (Proyecto)</option><option value = 3>Apoyo en sesión de levantamiento técnico</option>";
+  var endselect = "</select>";
+  return select + opt + endselect;  
+}
+/* FIN PCpsySDComercial **/
+
+
+
+
+
+
+
+
+
+
+
+/************************ 1 FCformComercial */
+function FCformComercial(){
+    var select = "<select name='formtion' class='form-control' onchange='TrFComercial(this.value)'>";
+    var opt = "<option value = 0>Seleccione una opción</option><option value = 11>1- Carga de nuevo cliente</option><option value =12>2- Apoyo en el levantamiento de requerimientos</option><option value =13>3- Realizar propuesta de implementación</option><option value =14>4- Demo</option><option value =15>5- Inicio Implementación</option><option value =16>6- Diagnóstico Instancia Zendesk</option><option value =17>7- Documento comparativo</option><option value =18>8- Diagrama de alcance</option><option value = 19>9- Otra solicitud</option>";
+    var endselect = "</select>";
+    return select + opt + endselect;  
+  }
+
+function TrFComercial(val) {
+  var html;
+  if(val == 11){     //*** 0- Carga de nuevo cliente ***//
+    html = "<label><b>*Cliente</b></label><input type='text' name='nombre' placeholder='Nombre empresa/cliente' required='required' class='form-control'><input type='email' name='email' placeholder='Email empresa/cliente' required='required' class='form-control'>";
+  }
+
+  if(val == 12) {    //*** 1- Apoyo en el levantamiento de requerimientos ***//
+    html ="<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select><label><b>*Fecha estimada</b></label><input type='date' name='fecest' class='form-control'><label><b>*Hora Sesión</b></label><select name='horases' class='form-control'><option value='0'>-</option><option value='00:09'>00:09</option><option value='00:10'>00:10</option><option value='00:11'>00:11</option><option value='00:12'>00:12</option><option value='00:01'>00:01</option><option value='00:02'>00:02</option><option value='00:03'>00:03</option><option value='00:04'>00:04</option><option value='00:05'>00:05</option><option value='00:06'>00:06</option></select>";
+  }
+
+  if(val == 13){     //*** 2- Realizar propuesta de implementación ***//
+    html ="<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select>";
+  }
+
+  if(val == 14){   //*** 3- Demo ***//   
+    html ="<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select>";
+  }
+
+  if(val == 15){   //*** 4- Inicio Implementación***//   
+    html ="<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select>";
+  }
+
+  if(val == 16){ //*** 5- Diagnostico instancia zendesk***//
+    html ="<label><b>*Cliente</b></label><select name='clientes' class='form-control'><option value='0'>Seleccione</option></select>";
+  }
+
+  if(val == 17){  //*** 6- Documento comparativo ***//    
+  }
+
+  if(val == 18){   //*** 7- Diagrama de alcance ***//   
+  }
+
+  if(val == 19){   //*** 8- Otra solicitud ***//  
+  }
+
+  $("#trigger3Div").empty();
+  $("#trigger3Div").append(html);
+
+}
+
+
+/************************ 2 SD Clientes */
+function SCsdClientes(){
+    var select = "<label><b>*Tipo de Servicio</b></label><select name='formtion' class='form-control' onchange='TrSDCliente(this.value)'>";
+    var opt = "<option value = 0 >Seleccione una opción</option><option value = 1>Implementación Optimización</option><option value = 2>Diagnóstico</option><option value = 3>Capacitación/Worshop</option>";
+    var endselect = "</select>";
+    return select + opt + endselect;  
+  }
+
+function TrSDCliente(val) {
+  var html;
+}
+/** ************************ */
+
+
+/************************ 3 PCpsySDComercial */
+function PCpsySDComercial() { //OPTION PRINCIPAL
+    var select = "<select name='formtion' class='form-control' onchange='TrPCpsy(this.value)'>";
+    var opt = "<option value = 0>Seleccione una opción</option><option value = 1>Propuesta</option><option value = 2>Demo</option><option value = 3>Diagnóstico</option><option value = 4>Apoyo para levantamiento</option><option value = 5>Compatibilidad APP - Int Zendesk</option>";
+    var endselect = "</select>";
+    return select + opt + endselect;  
+}
+
+function TrPCpsy(val) {
+  var html;
+  if(val == 1)
+    {
+      html = "<label><b>*Detalle Propuesta</b></label><select name='form3PSyCOm' class='form-control' onchange='getValuesx(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Propuesta Implementación</option><option value = '2'>Propuesta Optimización</option><option value = '3'>Arquitectura</option><option value = '4'>Ajuste propuesta (Cambio de alcance)</option><option value = '5'>Ajuste de Horas</option></select><label><b>*Estado de la Propuesta</b></label><select name='form3PSyCOm' class='form-control' onchange='getValue(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Revisando el levantamiento</option><option value = '2'>En Elaboración</option><option value = '3'>En Ajustes</option><option value = '4'>Esperando por Comercial</option><option value = '5'>Entregada</option><option value = '6'>No Avanzó</option></select>";
+    }
+  if(val == 2)
+    {
+      html = "<label><b>*Estatus del Demo</b></label><select name='form4PSyCOm' class='form-control' onchange='getValuesx(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>En Revisión</option><option value = '2'>En Configuración</option><option value = '3'>Esperando por comercial</option><option value = '4'>Revisado</option><option value = '5'>No Avanzó</option></select><label><b>*Tipo de Cuenta (Demo)</b></label><select name='form3PSyCOm' class='form-control' onchange='getValue4(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Estrategica</option><option value = '2'>Normal</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='2223232' value='' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    }
+  if(val == 3)
+    {
+      html = "<label><b>*URL Instancia del Cliente</b></label><input type='text' name='1919119919119' class='form-control'><label><b>*Usuario</b></label><input type='text' name='1919119919' class='form-control'><label><b>*Contraseña</b></label><input type='text' name='119919' class='form-control'><label><b>*Fecha de Entrega</b></label><input type='date' name='29292929' class='form-control' placeholder='P.Ej 20 de Octubre 2022'>";
+    }
+  if(val == 4)
+    {
+      html = "<label><b>*Tipo levantamiento</b></label><select name='form5PSyCOm' class='form-control' onchange='getValuesx(this.value)'><option value = '0'>Seleccione una opción</option><option value = '1'>Implementación (proceso de atención)</option><option value = '2'>Técnico</option><option value = '3'>Dual</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='2223232' value='' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    }
+  if(val == 5)
+    {
+    }
+  $("#trigger3Div").empty();
+  $("#trigger3Div").append(html);
+}
+
+/************************ FIN PCpsySDComercial */
+
+/******** 3 PCpsySDComercial */
+PDpsySDIntegration(){ 
+    var select = "<select name='formtion' class='form-control' onchange='TrPCpsy(this.value)'>";
+    var opt = "<option value = 0>Seleccione una opción</option><option value = 1>Propuesta</option><option value = 2>Demo</option><option value = 3>Diagnóstico</option><option value = 4>Apoyo para levantamiento</option><option value = 5>Compatibilidad APP - Int Zendesk</option>";
+    var endselect = "</select>";
+
+  var opt = "<option value = 0 >Seleccione una opción</option><option value = 1>Apoyo propuesta</option><option value = 2>Implementación (Proyecto)</option><option value = 3>Apoyo en sesión de levantamiento técnico</option>";
+
+
+
+
+}
+/* FIN PCpsySDComercial **/
+
+
+function trigger(opt){
+  var html;
+  console.log('shut op' + opt)
+  if(opt == 11)
+      html = fcNuevoCliente();
+
+  $("#tiggerDiv").empty();
+  $("#tiggerDiv").append(html);
+
+}
+
+form3PSyCOm=5&
+form3PSyCOm=6&
+fecha_propuesta=2022-01-07
+&url_propuesta=sssss

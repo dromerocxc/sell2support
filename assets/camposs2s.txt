@@ -1,0 +1,319 @@
+Id:1500015683082 URL Instancia diagnostico s2s 
+Id:1900007277085 Usuario diagnostico (Instancia) s2s 
+Id:1500015626281 Contraseña instancia diagnostico s2s 
+Id:1500015626301 Fecha de entrega diagnóstico s2s 
+
+Id:1500015680862 Fecha de Entrega Propuesta s2s
+Id:1900007274885 URL Entrega propuesta s2s
+
+Id:1500015683202 URL Levantamiento s2s
+Id:1500015683522 Fecha entrega levantamiento s2s
+Id:1500015626801 Fecha entrega demo s2s 
+Id:1500015626301 Fecha de entrega diagnostico
+
+
+Selects
+----
+Id:1500015626221 Status del demo s2s 
+Id:1500015682942 Tipo Cuenta Demo s2s
+Id:1500015626841 Tipo levantamiento s2s 
+Id:1900007276365 Estatus Propuesta s2s 
+Id:1500015626001 Detalle Propuesta s2s 
+Id:1500015625741 Tipo Solicitud Comercial2Support s2s 
+
+
+
+Propuesta,propuesta,false
+Demo,demo,false
+Diagnóstico,diagnóstico,false
+Apoyo para Levantamiento,apoyo_para_levantamiento,false
+Compatibilidad APP,compatibilidad_app,false
+
+$(function (){  
+      var client = ZAFClient.init();  
+      client.invoke('resize', { width: '100%', height: '450px' });
+
+
+  client.context().then(function(context) {  
+    console.log(context);
+    //context.currentUser.email
+        /*oauth* 590ed5dbe406d22527b2860af5f7c7f15ae0a7299ce067b4eb5916202b7d7014/*/
+
+        /*ID SUPPORT 87847213-bce2-452b-be8d-1cdd3891fb4b*/
+        /*ID SELL    1f53b6fe-f273-4b26-a9de-ec9282ce6b67 */
+
+  });
+
+});
+
+function getOption(opt){
+    var client = ZAFClient.init();  
+
+ client.get("deal.name").then(function(data) {      
+    console.log(data["deal.name"]);
+
+
+       var deal = data["deal.name"];
+        var options;
+        if(opt == 1){
+           options = propuesta(deal);}
+        else if(opt == 2) {
+           options = demo(deal);} 
+        else if(opt == 3) {
+           options = diagnostico(deal);} 
+        else if(opt == 4){
+           options = apoyo_para_levantamiento(deal);}
+        else if(opt == 5){
+           options = compatibilidad(deal);}
+        else
+           options = 'N/D';
+        $("#optionform").empty();
+        $("#optionform").append(options);
+  });
+}
+
+
+
+function actionbtn(){
+  var client = ZAFClient.init("87847213-bce2-452b-be8d-1cdd3891fb4b");  
+  /*var otherClient = client.instance('87847213-bce2-452b-be8d-1cdd3891fb4b');
+  console.log('pa dentro');
+  console.log(otherClient);*/
+
+  var deal_name;      
+  var datos = $("#form_propuestas").serialize() 
+  $("#form_propuestas").find(':input').each(function() {
+     var elemento= this;
+     if(elemento.id == 'deal'){
+        deal_name = elemento.value;
+     }
+     console.log("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value); 
+  });
+
+    requestSetting = {
+      url: "https://slscxc1568216011.zendesk.com/api/v2/tickets.json",
+      contentType: "application/json",
+      headers: {
+        "Authorization": 'Basic '+btoa('dromero@cxc.mx:21Claudia21!*'),
+        "content-type": "application/json",
+      },  
+      secure: true,
+      dataType: 'json',
+      type: "GET"
+    };
+
+    client.request(requestSetting).then( (data) => {
+      console.log("POST data:", data);
+      //window.document.querySelector('#requestData').innerHTML = "<br/>" + data["data"]
+ });
+
+
+
+/*let options = {  
+        url: 'https://slscxc1568216011.zendesk.com/api/v2/tickets.json',  
+        type: 'GET',
+        headers: 'Basic '+btoa('dromero@cxc.mx:21Claudia21!*'),  
+        cors: true,
+        crossDomain: true
+   };
+
+return client.request(options).then((results) => {  
+    console.log("Example 2 call results:", results);
+});*/
+
+/*$.ajax
+    ({
+      type: "GET",
+      url: "https://slscxc1568216011.zendesk.com/api/v2/tickets.json",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')
+      },
+     success: function (){
+     console.log('Thanks for your comment!'); 
+   }
+ });*/
+
+
+
+
+
+
+}
+
+
+
+/**** PROPUESTAS */
+function propuesta(deal){
+     var html = '';
+     html += "<form name='form_propuestas' id='form_propuestas'>";
+     html += "<label><b>*Detalle Propuesta</b></label><select name='1500015626001' id='1500015626001' class='form-control'>";
+     html += "<option value = '0'>Seleccione una opción</option><option value = 'propuesta_implementación'>Propuesta Implementación</option>";
+     html += "<option value = 'propuesta_optimizacion'>Propuesta Optimización</option><option value = 'arquitectura'>Arquitectura</option>";
+     html += "<option value = 'ajustes_de_propuesta'>Ajuste propuesta (Cambio de alcance)</option><option value = 'ajuste_horas'>Ajuste de Horas</option>";
+     html += "</select><label><b>*Estado de la Propuesta</b></label><select name='1900007276365' id='1900007276365' class='form-control'>";
+     html += "<option value = '0'>Seleccione una opción</option><option value = 'revisando_el_levantamiento'>Revisando el levantamiento</option>";
+     html += "<option value = 'en_elaboracion'>En Elaboración</option><option value = 'en_ajustes'>En Ajustes</option>";
+     html += "<option value = 'esperando_por_comercial'>Esperando por Comercial</option><option value = 'entregada'>Entregada</option><option value = '6'>No Avanzó</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015680862' id='1500015680862' class='form-control'><label><b>*URL de Entrega</b></label><input type='text' name='1900007274885' id='1900007274885' class='form-control'>";
+     html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+     html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+     html += "<div align='right'><br><button class='btn btn-xs btn-success' onclick='actionbtn()'>Enviar</button></div>";
+     html += "</form>";
+     $("#trigger3Div").empty();
+     $("#trigger3Div").append(html);
+ }
+function demo(deal){
+    var html = '';
+    html += "<form name='form_propuestas' id='form_propuestas'>";
+    html += "<label><b>*Estatus del Demo</b></label><select name='1500015626221' id='1500015626221' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'en_revision'>En Revisión</option><option value = 'en_configuracion'>En Configuración</option><option value = 'esperando_a_comercial'>Esperando por comercial</option><option value = 'revisado'>Revisado</option><option value = 'no_avanzo'>No Avanzó</option></select><label><b>*Tipo de Cuenta (Demo)</b></label><select name='1500015682942' id='1500015682942' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'estrategica'>Estrátegica</option><option value = 'normal'>Normal</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015626801' id='1500015626801' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' onclick='actionbtn()'>Enviar</button></div>";
+    html += "</form>";
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+
+}
+
+function diagnostico(deal){
+    var html = '';
+    html += "<form name='form_diagnostico' id='form_propuestas'>";
+    html += "<label><b>*URL Instancia cliente</b></label><input type'text' name='url-cliente' id='1500015683082' class='form-control'><label><b>*Usuario</b></label><input type'text' name='1900007277085' id='1900007277085' class='form-control'><label><b>*Contraseña</b></label><input type'text' name='1500015626281' id='1500015626281' class='form-control'><label><b>*Fecha de Entrega</b></label><input type='date' name='1500015626301' id='1500015626301' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' name='obser' id='obser' placeholder='Comentarios'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' onclick='actionbtn()'>Enviar</button></div>";
+    html += "</form>";
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+
+}
+
+function apoyo_para_levantamiento(deal){
+    var html = '';
+    html += "<form name='form_apoyo' id='form_propuestas'>";
+    html += "<label><b>*Tipo levantamiento</b></label><select name='1500015626841' id='1500015626841' class='form-control'><option value = '0'>Seleccione una opción</option><option value = 'implementacion_proceso_de_atencion'>Implementación (proceso de atención)</option><option value = 'tecnico_im'>Técnico</option><option value = 'dual'>Dual</option></select><label><b>*Fecha de Entrega</b></label><input type='date' name='2223232' value='' class='form-control' placeholder='p.j 1 de Octubre 2022'>";
+    html += "<label><b>Comentarios</b></label><textarea class='form-control' placeholder='Comentarios' name='obser' id='obser'></textarea>";
+    html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' onclick='actionbtn()'>Enviar</button></div>";
+    html += "</form>";
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+}
+
+function compatibilidad(deal){
+    var html = '';
+    html += "<form name='form_apoyo' id='form_propuestas'>";
+    html += "<label><b>*Nombre APP</b></label><input type='text' name='2223232' id='2223232'  class='form-control' placeholder='App's>";
+    html += "<label>Comentarios.:</label><textarea name='obser' id='obser' class='form-control' placeholder='Comentarios'></textarea>";
+     html += "<input type='hidden' value='"+deal+"' name='deal' id='deal'>";
+    html += "<div align='right'><br><button class='btn btn-xs btn-success' onclick='actionbtn()'>Enviar</button></div>";
+    html += "</form>";
+    $("#trigger3Div").empty();
+    $("#trigger3Div").append(html);
+}
+
+/**** FIN PROPUESTAS */
+
+
+
+
+
+
+
+
+
+function f_btn(opt, client, request, trato){
+    console.log("TRATO: " + trato);
+    console.log('este es el contacto: ' + $("#contacto").val());
+
+    var campos;
+    var data;
+    var obser = $('#obser').val();
+    if(opt == 1){
+        console.log('f_propuesta----------------------------');
+        console.log($('#1500015626001').val()); 
+        console.log($('#1900007276365').val());
+        console.log($('#1500015680862').val());
+        console.log($('#1900007274885').val());
+        data = JSON.stringify({"ticket": {"subject": "Propuesta s2s para el trato.: "+trato+" del contacto.: "+$("#contacto").val(),"tags":["s2s", "s2s-propuesta"],"comment":{ "body": "Notas.: " +obser },"requester": { "email": request },"custom_fields": [{"id": 1500015626001, "value": $('#1500015626001').val()},{"id": 1900007276365, "value": $('#1900007276365').val()},{"id": 1500015680862, "value": $('#1500015680862').val()},{"id": 1900007274885, "value": $('#1900007274885').val()}]}});
+        console.log('limpio form');
+        $('#1500015626001').val(0); 
+        $('#1900007276365').val(0);
+        $('#1500015680862').val('');
+        $('#1900007274885').val('');
+        $("#propuestas").hide();    
+        console.log(data);              
+    }
+    if(opt == 2){
+        console.log('f_demo----------------------------------');
+        console.log($('#1500015626221').val()); 
+        console.log($('#1500015682942').val()); 
+        console.log($('#1500015626801').val());  
+        console.log('limpio form');
+        data = JSON.stringify({"ticket": {"subject": "Demo s2s para el trato.: "+trato+" del contacto.: "+$("#contacto").val(),"tags":["s2s", "s2s-demo"],"comment":{ "body": "Notas.: " +obser },"requester": { "email": request },"custom_fields": [{"id": 1500015626221, "value": $('#1500015626221').val()},{"id": 1500015682942, "value": $('#1500015682942').val()},{"id": 1500015626801, "value": $('#1500015626801').val()}]}});
+        $('#1500015626221').val(0); 
+        $('#1500015682942').val(0); 
+        $('#1500015626801').val('');  
+        $("#demo").hide();    
+    }
+    if(opt == 3){
+       console.log('diagnostico----------------------------------');
+       console.log($('#1500015683082').val());
+       console.log($('#1900007277085').val());
+       console.log($('#1500015626281').val());
+       console.log($('#1500015626301').val());     
+       console.log('limpio form');
+       data = JSON.stringify({"ticket": {"subject": "Diagnostico s2s para el trato.: "+trato+" del contacto.: "+$("#contacto").val(),"tags":["s2s", "s2s-Diagnostico"],"comment":{ "body": "Notas.: " +obser },"requester": { "email": request },"custom_fields": [{"id": 1500015683082, "value": $('#1500015683082').val()},{"id": 1900007277085, "value": $('#1900007277085').val()}, {"id": 1500015626281, "value": $('#1500015626281').val()}, {"id": 1500015626301, "value": $('#1500015626301').val()}]}});
+       $('#1500015683082').val(0);
+       $('#1900007277085').val('');
+       $('#1500015626281').val('');
+       $('#1500015626301').val('');
+       $("#diagnostico").hide();    
+    }
+    if(opt == 4){
+       console.log('f_apoyo-----------------------------------');
+       console.log($("#1500015626841").val());
+       console.log($("#1500015683522").val());
+       data = JSON.stringify({"ticket": {"subject": "Apoyo para levantamiento s2s para el trato.: "+trato+" del contacto.: "+$("#contacto").val(),"tags":["s2s", "s2s-Apoyo"],"comment":{ "body": "Notas.: " +obser },"requester": { "email": request },"custom_fields": [{"id": 1500015626841, "value": $('#1500015626841').val()},{"id": 1500015683522, "value": $('#1500015683522').val()}]}});
+       $("#1500015626841").val('');
+       $("#1500015683522").val('');
+       $("#apoyo").hide();    
+    }
+    if(opt == 5){
+        console.log('f_compatibilidad------------------------');
+        console.log($("#1900007536365").val());    
+        console.log('Armo');
+        /*limpio */
+        data = JSON.stringify({"ticket": {"subject": "Compatibilidad s2s para el trato.: "+trato+" del contacto.: "+$("#contacto").val(),"tags":["s2s", "s2s-Compatibilidad"],"comment":{ "body": "Notas.: " +obser },"requester": { "email": request },"custom_fields": [{"id": 1900007536365, "value": $('#1900007536365').val()}]}});
+        $("#1900007536365").val('');
+        $("#compatibilidad").hide();    
+        console.log('envio');
+     }
+
+
+
+    /*requestSetting = {
+      url: "https://slscxc1568216011.zendesk.com/api/v2/search.json?query=44562",
+      contentType: "application/json",
+      headers: {"Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')},
+      secure: true,
+      cors: true,
+      type: "GET",
+      dataType: 'json'
+    };*/
+
+    /*requestSetting = {
+      url: "https://slscxc1568216011.zendesk.com/api/v2/tickets.json",
+      contentType: "application/json",
+      headers: {"Authorization": "Basic "+btoa('dromero@cxc.mx:21Claudia21!*')},
+      secure: true,
+      cors: true,
+      type: "POST",
+      dataType: 'json',
+      data: data};
+    client.request(requestSetting).then((data) => {
+      console.log(data);
+    });*/
+
+}
+
